@@ -1,11 +1,12 @@
 import React from "react";
 import SignInSide from "../../components/Auth/SigninSide";
+import Default from "../../layouts/Default";
 
 const Login = () => {
   return (
-    <div>
+    <Default>
       <SignInSide />
-    </div>
+    </Default>
   );
 };
 

@@ -1,11 +1,12 @@
 import React from "react";
 import Register from "../../components/Auth/SignUp";
+import Default from "../../layouts/Default";
 
 const SignUp = () => {
   return (
-    <div>
+    <Default>
       <Register />
-    </div>
+    </Default>
   );
 };
 

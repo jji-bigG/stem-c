@@ -1,7 +1,8 @@
 import React from "react";
+import Default from "../../layouts/Default";
 
 const PasswordReset = () => {
-  return <div>PasswordReset</div>;
+  return <Default>PasswordReset</Default>;
 };
 
 export default PasswordReset;
