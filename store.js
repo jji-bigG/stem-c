@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducers from "./reducers";
+import reducer from "./reducers";
 import thunk from "redux-thunk";
 
 export default configureStore({
-  reducers,
+  reducer,
   middleware: [thunk],
 });
