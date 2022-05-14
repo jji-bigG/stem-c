@@ -15,27 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Link from "next/link";
 import { Field, Form } from "react-final-form";
 import { useDispatch } from "react-redux";
-import { Input, required as requiredValidation } from "../inputs";
+import { Input, required as requiredValidation, SelectField } from "../inputs";
 
 import validator from "validator";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -167,6 +149,18 @@ export default function SignUp() {
                         />
                       </Grid>
                       <Grid item xs={12}>
+                        <Typography variant="h6" sx={{ mb: 2 }}>
+                          Sign Up As
+                        </Typography>
+                        <Field
+                          component={SelectField}
+                          label="Role"
+                          validate={requiredValidation}
+                          name="role"
+                          options={["Student", "Company Sponsor", "Club Admin"]}
+                        />
+                      </Grid>
+                      {/* <Grid item xs={12}>
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -176,7 +170,7 @@ export default function SignUp() {
                           }
                           label="I want to receive inspiration, marketing promotions and updates via email."
                         />
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                     <Button
                       type="submit"
@@ -202,7 +196,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
