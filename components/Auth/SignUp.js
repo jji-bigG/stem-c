@@ -2,7 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import LinkMui from "@mui/material/Link";
@@ -16,7 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Link from "next/link";
 import { Field, Form } from "react-final-form";
 import { useDispatch } from "react-redux";
-import { Input } from "../inputs";
+import { Input, required as requiredValidation } from "../inputs";
+
+import validator from "validator";
 
 function Copyright(props) {
   return (
@@ -82,26 +83,37 @@ export default function SignUp() {
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
                         <Field
-                          name="firstname"
-                          validate={required}
+                          name="firstName"
+                          validate={requiredValidation}
                           component={Input}
+                          label="First Name"
+                          id="firstname"
                           fullWidth
                           required
                           autoFocus
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
-                        <TextField
+                        <Field
+                          component={Input}
+                          validate={requiredValidation}
                           required
                           fullWidth
-                          id="lastName"
                           label="Last Name"
                           name="lastName"
                           autoComplete="family-name"
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <TextField
+                        <Field
+                          component={Input}
+                          validate={(val) =>
+                            val
+                              ? validator.isEmail(val)
+                                ? undefined
+                                : "Must be a valid email"
+                              : "Required"
+                          }
                           required
                           fullWidth
                           id="email"
@@ -111,13 +123,46 @@ export default function SignUp() {
                         />
                       </Grid>
                       <Grid item xs={12}>
-                        <TextField
+                        <Field
+                          component={Input}
+                          validate={(val) =>
+                            val
+                              ? validator.isStrongPassword(val, {
+                                  minSymbols: 0,
+                                  minLength: 8,
+                                  minLowercase: 1,
+                                  minUppercase: 1,
+                                  minNumbers: 1,
+                                })
+                                ? undefined
+                                : "Password not strong enough"
+                              : "Required"
+                          }
                           required
                           fullWidth
                           name="password"
                           label="Password"
                           type="password"
                           id="password"
+                          autoComplete="new-password"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Field
+                          component={Input}
+                          validate={(val) =>
+                            val
+                              ? val === values.password
+                                ? undefined
+                                : "Passwords must match"
+                              : "Required"
+                          }
+                          required
+                          fullWidth
+                          name="password2"
+                          label="Confirm Password"
+                          type="password"
+                          id="password2"
                           autoComplete="new-password"
                         />
                       </Grid>
@@ -135,6 +180,7 @@ export default function SignUp() {
                     </Grid>
                     <Button
                       type="submit"
+                      disabled={submitting}
                       fullWidth
                       variant="contained"
                       sx={{ mt: 3, mb: 2 }}
