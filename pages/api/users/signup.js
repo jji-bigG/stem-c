@@ -1,5 +1,5 @@
 import User from "../../models/User";
-import mongodb from "../../lib/mongodb";
+import mongodb from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
   const { method } = req;

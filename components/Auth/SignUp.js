@@ -157,7 +157,11 @@ export default function SignUp() {
                           label="Role"
                           validate={requiredValidation}
                           name="role"
-                          options={["Student", "Company Sponsor", "Club Admin"]}
+                          options={[
+                            "Student/Member",
+                            "Sponsor/Company",
+                            "Club Admin",
+                          ]}
                         />
                       </Grid>
                       {/* <Grid item xs={12}>
